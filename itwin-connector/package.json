@@ -1,0 +1,31 @@
+{
+  "name": "freecad-itwin-connector",
+  "version": "0.1.0",
+  "description": "iTwin.js connector for FreeCAD .fcitwin bundles",
+  "license": "LGPL-2.1-only",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint src/ tests/",
+    "convert": "node dist/cli.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.10"
+  },
+  "devDependencies": {
+    "@types/adm-zip": "^0.5.5",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^18.19.0",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

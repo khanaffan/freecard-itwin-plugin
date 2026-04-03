@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "FreeCAD-iTwin Manifest",
+  "description": "Manifest file for .fcitwin exchange bundles",
+  "type": "object",
+  "required": ["version", "generator", "source", "objects"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Bundle format version",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "generator": {
+      "type": "string",
+      "description": "Plugin version that created this bundle"
+    },
+    "source": {
+      "type": "object",
+      "required": ["fileName", "fileHash", "freecadVersion"],
+      "properties": {
+        "fileName": { "type": "string" },
+        "fileHash": { "type": "string", "description": "SHA-256 hash of the source .FCStd file" },
+        "freecadVersion": { "type": "string" }
+      }
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "type"],
+        "properties": {
+          "id": { "type": "string", "description": "FreeCAD object UUID" },
+          "name": { "type": "string" },
+          "type": { "type": "string", "description": "FreeCAD TypeId" },
+          "parentId": { "type": ["string", "null"] },
+          "shapeFile": { "type": ["string", "null"], "description": "Path to BREP file in shapes/" },
+          "meshFile": { "type": ["string", "null"], "description": "Path to OBJ mesh in shapes/" },
+          "sketchFile": { "type": ["string", "null"], "description": "Path to sketch JSON in sketches/" },
+          "drawingFile": { "type": ["string", "null"], "description": "Path to drawing JSON in drawings/" }
+        }
+      }
+    },
+    "parametricTreeFile": {
+      "type": ["string", "null"],
+      "description": "Path to parametric-tree.json"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ECSchema schemaName="FreeCAD" alias="fc"
+          version="01.00.00"
+          xmlns="http://www.bentley.com/schemas/Bentley.ECXML.3.2">
+
+  <ECSchemaReference name="BisCore" version="01.00.14" alias="bis"/>
+  <ECSchemaReference name="CoreCustomAttributes" version="01.00.03" alias="CoreCA"/>
+
+  <!-- Source document metadata -->
+  <ECEntityClass typeName="SourceDocument" modifier="Sealed">
+    <BaseClass>bis:DefinitionElement</BaseClass>
+    <ECProperty propertyName="FreeCadVersion" typeName="string"/>
+    <ECProperty propertyName="SourceFileHash" typeName="string"/>
+    <ECProperty propertyName="OriginalFileName" typeName="string"/>
+    <ECProperty propertyName="ShapeHash" typeName="string"
+                description="Topology-based hash for round-trip verification"/>
+  </ECEntityClass>
+
+  <!-- Parametric feature definition stored as aspect -->
+  <ECEntityClass typeName="ParametricDefinition" modifier="Sealed">
+    <BaseClass>bis:ElementMultiAspect</BaseClass>
+    <ECProperty propertyName="FeatureType" typeName="string"/>
+    <ECProperty propertyName="FeatureIndex" typeName="int"/>
+    <ECProperty propertyName="ParametersJson" typeName="string"/>
+    <ECProperty propertyName="DependsOn" typeName="string"
+                description="Comma-separated list of dependency feature names"/>
+  </ECEntityClass>
+
+  <!-- Sketch with constraints -->
+  <ECEntityClass typeName="SketchDefinition" modifier="Sealed">
+    <BaseClass>bis:ElementUniqueAspect</BaseClass>
+    <ECProperty propertyName="GeometryJson" typeName="string"/>
+    <ECProperty propertyName="ConstraintsJson" typeName="string"/>
+    <ECProperty propertyName="PlaneOriginX" typeName="double"/>
+    <ECProperty propertyName="PlaneOriginY" typeName="double"/>
+    <ECProperty propertyName="PlaneOriginZ" typeName="double"/>
+    <ECProperty propertyName="PlaneNormalX" typeName="double"/>
+    <ECProperty propertyName="PlaneNormalY" typeName="double"/>
+    <ECProperty propertyName="PlaneNormalZ" typeName="double"/>
+  </ECEntityClass>
+
+  <!-- Raw BREP for exact reconstruction -->
+  <ECEntityClass typeName="BrepGeometry" modifier="Sealed">
+    <BaseClass>bis:ElementUniqueAspect</BaseClass>
+    <ECProperty propertyName="BrepData" typeName="binary"/>
+    <ECProperty propertyName="BrepFormat" typeName="string"/>
+    <ECProperty propertyName="CompressedSize" typeName="long"/>
+  </ECEntityClass>
+
+  <!-- Visual styling from FreeCAD GUI -->
+  <ECEntityClass typeName="GuiStyle" modifier="Sealed">
+    <BaseClass>bis:ElementUniqueAspect</BaseClass>
+    <ECProperty propertyName="ShapeColor" typeName="string"/>
+    <ECProperty propertyName="LineColor" typeName="string"/>
+    <ECProperty propertyName="LineWidth" typeName="double"/>
+    <ECProperty propertyName="Transparency" typeName="double"/>
+    <ECProperty propertyName="Visibility" typeName="boolean"/>
+    <ECProperty propertyName="DisplayMode" typeName="string"/>
+  </ECEntityClass>
+
+  <!-- TechDraw page -->
+  <ECEntityClass typeName="TechDrawPage" modifier="Sealed">
+    <BaseClass>bis:DrawingGraphic</BaseClass>
+    <ECProperty propertyName="PageTemplate" typeName="string"/>
+    <ECProperty propertyName="Scale" typeName="double"/>
+    <ECProperty propertyName="AnnotationsJson" typeName="string"/>
+    <ECProperty propertyName="SvgData" typeName="string"/>
+  </ECEntityClass>
+
+</ECSchema>
